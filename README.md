@@ -23,7 +23,7 @@ Maven
 Пример: java -DDB_NAME=surveyService -DDB_USER=root -DDB_PASSWORD=root -jar fabriqueTestTask-0.0.1-SNAPSHOT.jar  
 
 # Документация по API  
-Хост: http://localhost:8080
+Хост: http://localhost:8080  
 Сервис для передачи запросов: https://web.postman.co/
 ## Авторизация в системе  
 `POST /auth/login`  
