@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SurveyDto {
+    private Long id;
     private String title;
     private LocalDateTime expirationDate;
     private String description;
