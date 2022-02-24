@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="1" author="Mikhail Galkin">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_pkey"/>
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="Mikhail Galkin">
+        <createTable tableName="answers">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="answers_pkey"/>
+            </column>
+            <column name="answer" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="survey_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="question_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="Mikhail Galkin">
+        <createTable tableName="questions">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="questions_pkey"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="Mikhail Galkin">
+        <createTable tableName="roles">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="roles_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="Mikhail Galkin">
+        <createTable tableName="survey">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="survey_pkey"/>
+            </column>
+            <column name="title" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="start_date" type="DATETIME(6)">
+            </column>
+            <column name="expiration_date" type="DATETIME(6)">
+            </column>
+            <column name="description" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creator_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="Mikhail Galkin">
+        <createTable tableName="survey_questions">
+            <column name="survey_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="survey_questions_pkey"/>
+            </column>
+            <column name="question_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="survey_questions_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="Mikhail Galkin">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_roles_pkey"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="user_roles_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="8" author="Mikhail Galkin">
+        <addUniqueConstraint tableName="user" columnNames="username" constraintName="UKsb8bbouer5wak8vyiiy4pf2bx"/>
+    </changeSet>
+    <changeSet id="9" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="survey_questions" baseColumnNames="survey_id" constraintName="FK6d3brrwy6141fd7375ux6udnx" referencedTableName="survey"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="10" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="survey_questions" baseColumnNames="question_id" constraintName="FKqytbkp9kflqfk2jde72d2tkg1" referencedTableName="questions"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="11" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="user_roles" baseColumnNames="user_id" constraintName="FK55itppkw3i07do3h7qoclqd4k" referencedTableName="user"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="12" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="user_roles" baseColumnNames="role_id" constraintName="FKh8ciramu9cc9q3qcqiv4ue8a6" referencedTableName="roles"
+                                 referencedColumnNames="id" onUpdate="RESTRICT" onDelete="RESTRICT"/>
+    </changeSet>
+    <changeSet id="13" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="answers" baseColumnNames="user_id" constraintName="FK4l9tdx1qt5esehos4ygj0sa81" referencedTableName="user"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="14" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="answers" baseColumnNames="survey_id" constraintName="FK516yt8vy53hyq47uoyew7yu9m" referencedTableName="survey"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="15" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="answers" baseColumnNames="question_id" constraintName="FK3erw1a3t0r78st8ty27x6v3g1" referencedTableName="questions"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+    <changeSet id="16" author="Mikhail Galkin">
+        <addForeignKeyConstraint baseTableName="survey" baseColumnNames="creator_id" constraintName="FKdjxtcdu2rl4ch16w8sgnhn9gg" referencedTableName="user"
+                                 referencedColumnNames="id" onDelete="RESTRICT" onUpdate="RESTRICT"/>
+    </changeSet>
+</databaseChangeLog>

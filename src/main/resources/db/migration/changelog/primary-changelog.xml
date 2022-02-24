@@ -1,0 +1,81 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="prm-ins" author="Mikhail Galkin">
+        <insert tableName="roles">
+            <column name="id" value="1"/>
+            <column name="name" value="ADMIN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="id" value="2"/>
+            <column name="name" value="USER"/>
+        </insert>
+        <insert tableName="user">
+            <column name="id" value="1"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$12$m49cwdIzDUxZED6wmrVhdOST4IUqBu0cy4j7syH8wB8KN8fyCi4wa"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="1"/>
+            <column name="role_id" value="1"/>
+        </insert>
+        <insert tableName="user">
+            <column name="id" value="2"/>
+            <column name="username" value="user"/>
+            <column name="password" value="$2a$12$MxCS/lAUlXBq9OOSUUObHuFKowQOccYdetHPJDdE7G9vFDVSLoIF."/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="2"/>
+            <column name="role_id" value="2"/>
+        </insert>
+        <insert tableName="user">
+            <column name="id" value="3"/>
+            <column name="username" value="anonymous"/>
+            <column name="password" value="$2a$12$Yev0xBVcU/1A.2uUiZe1H.jSLaOo1wss0r1HS3XGBBnKAJj8YUqJG"/>
+        </insert>
+        <insert tableName="user_roles">
+            <column name="user_id" value="3"/>
+            <column name="role_id" value="2"/>
+        </insert>
+        <insert tableName="survey">
+            <column name="id" value="1"/>
+            <column name="title" value="Опрос 1"/>
+            <column name="start_date" value="2022-02-23 13:00:00.000000"/>
+            <column name="expiration_date" value="2022-05-23 13:00:00.000000"/>
+            <column name="description" value="Описание к опросу 1"/>
+            <column name="creator_id" value="1"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="id" value="1"/>
+            <column name="text" value="Вопрос 1 опроса 1"/>
+            <column name="type" value="TEXT"/>
+        </insert>
+        <insert tableName="survey_questions">
+            <column name="survey_id" value="1"/>
+            <column name="question_id" value="1"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="id" value="2"/>
+            <column name="text" value="Вопрос 2 опроса 1"/>
+            <column name="type" value="SINGLE_SELECT"/>
+        </insert>
+        <insert tableName="survey_questions">
+            <column name="survey_id" value="1"/>
+            <column name="question_id" value="2"/>
+        </insert>
+        <insert tableName="questions">
+            <column name="id" value="3"/>
+            <column name="text" value="Вопрос 3 опроса 1"/>
+            <column name="type" value="MULTI_SELECT"/>
+        </insert>
+        <insert tableName="survey_questions">
+            <column name="survey_id" value="1"/>
+            <column name="question_id" value="3"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
